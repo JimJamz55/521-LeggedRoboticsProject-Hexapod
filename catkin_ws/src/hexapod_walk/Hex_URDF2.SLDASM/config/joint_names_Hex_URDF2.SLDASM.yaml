@@ -23,15 +23,15 @@
       d: 10.0
     #leg1_knee_joint:
     #  p: 100.0
-    #  i: 0.01 
+    #  i: 0.01
     #  d: 10.0
     #Leg1_ankle_joint:
     #  p: 100.0
-    #  i: 0.01 
+    #  i: 0.01
     #  d: 10.0
 
 type: "position_controllers/JointPositionController"
-joints: leg1_hip_joint
+joint: leg1_hip_joint
  #- leg1_knee_joint
  #- Leg1_ankle_joint
 #type: "position_controllers/JointPositionController"
