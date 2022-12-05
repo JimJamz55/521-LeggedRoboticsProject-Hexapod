@@ -1,0 +1,1130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- This URDF was automatically created by SolidWorks to URDF Exporter! Originally created by Stephen Brawner (brawner@gmail.com) 
+     Commit Version: 1.6.0-1-g15f4949  Build Version: 1.6.7594.29634
+     For more information, please see http://wiki.ros.org/sw_urdf_exporter -->
+<robot
+  name="hexapod">
+  <link
+    name="base_link">
+    <inertial>
+      <origin
+        xyz="1.49045863671304E-07 -0.000405077975725275 -0.000217578181018556"
+        rpy="0 0 0" />
+      <mass
+        value="0.398507055317104" />
+      <inertia
+        ixx="0.000856625383676758"
+        ixy="5.55539889210267E-08"
+        ixz="1.12598154321323E-16"
+        iyy="0.000353970607728274"
+        iyz="5.54948061423538E-17"
+        izz="0.00115428844590398" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://hexapod_walk/Hex_URDF2.SLDASM/meshes/base_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://hexapod_walk/Hex_URDF2.SLDASM/meshes/base_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <link
+    name="leg1_link1">
+    <inertial>
+      <origin
+        xyz="-0.0180170002418232 0.018752535291974 -0.000520098314341614"
+        rpy="0 0 0" />
+      <mass
+        value="0.0153297831154609" />
+      <inertia
+        ixx="5.1165211847947E-06"
+        ixy="-6.44942081162194E-07"
+        ixz="-9.75769693975089E-11"
+        iyy="5.11678638010929E-06"
+        iyz="9.61066359289127E-11"
+        izz="4.47171272518642E-06" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://hexapod_walk/Hex_URDF2.SLDASM/meshes/leg1_link1.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://hexapod_walk/Hex_URDF2.SLDASM/meshes/leg1_link1.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="leg1_hip_joint"
+    type="revolute">
+    <origin
+      xyz="-0.07591 0.14091 0"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="leg1_link1" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-1.57"
+      upper="1.57"
+      effort="10"
+      velocity="100" />
+  </joint>
+  
+  <transmission name="leg1_hip_joint">
+    <type>transmission_interface/SimpleTransmission</type>
+    <actuator name="$leg1_hip_motor">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+    <joint name="leg1_hip_joint">
+      <hardwareInterface>PositionJointInterface</hardwareInterface>
+    </joint>
+  </transmission>
+  
+  <link
+    name="leg1_link2">
+    <inertial>
+      <origin
+        xyz="-0.0144780692009271 0.0138350441980288 -0.00064755576517848"
+        rpy="0 0 0" />
+      <mass
+        value="0.0549729697480829" />
+      <inertia
+        ixx="1.18174808048987E-05"
+        ixy="3.67806190798473E-07"
+        ixz="-2.1692108874973E-07"
+        iyy="1.15984737913807E-05"
+        iyz="2.1728032771257E-07"
+        izz="1.65909216038039E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://hexapod_walk/Hex_URDF2.SLDASM/meshes/leg1_link2.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://hexapod_walk/Hex_URDF2.SLDASM/meshes/leg1_link2.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="leg1_knee_joint"
+    type="revolute">
+    <origin
+      xyz="-0.03677 0.03677 0"
+      rpy="0 0 0" />
+    <parent
+      link="leg1_link1" />
+    <child
+      link="leg1_link2" />
+    <axis
+      xyz="-0.70711 -0.70711 0" />
+    <limit
+      lower="-1.57"
+      upper="1.57"
+      effort="10"
+      velocity="100" />
+  </joint>
+  
+  <transmission name="leg1_knee_joint">
+    <type>transmission_interface/SimpleTransmission</type>
+    <actuator name="$leg1_knee_joint">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+    <joint name="leg1_knee_joint">
+      <hardwareInterface>PositionJointInterface</hardwareInterface>
+    </joint>
+  </transmission>
+  
+  <link
+    name="leg1_link3">
+    <inertial>
+      <origin
+        xyz="-0.0308004685179728 0.0302080850392637 -0.0292125400897702"
+        rpy="0 0 0" />
+      <mass
+        value="0.0782413429576377" />
+      <inertia
+        ixx="3.25063556942522E-05"
+        ixy="6.21445767713284E-06"
+        ixz="-7.5922039407356E-06"
+        iyy="3.22872779020944E-05"
+        iyz="7.59259502067018E-06"
+        izz="2.34916838689469E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://hexapod_walk/Hex_URDF2.SLDASM/meshes/leg1_link3.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://hexapod_walk/Hex_URDF2.SLDASM/meshes/leg1_link3.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="Leg1_ankle_joint"
+    type="revolute">
+    <origin
+      xyz="-0.045608 0.045608 -0.0145"
+      rpy="0 0 0" />
+    <parent
+      link="leg1_link2" />
+    <child
+      link="leg1_link3" />
+    <axis
+      xyz="-0.70711 -0.70711 0" />
+    <limit
+      lower="-3.14"
+      upper="3.14"
+      effort="10"
+      velocity="100" />
+  </joint>
+  
+  <transmission name="Leg1_ankle_joint">
+    <type>transmission_interface/SimpleTransmission</type>
+    <actuator name="$Leg1_ankle_joint">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+    <joint name="Leg1_ankle_joint">
+      <hardwareInterface>PositionJointInterface</hardwareInterface>
+    </joint>
+  </transmission>
+  
+  <link
+    name="leg2_link1">
+    <inertial>
+      <origin
+        xyz="0.018752535291974 0.0180170002418231 -0.000520098314341594"
+        rpy="0 0 0" />
+      <mass
+        value="0.0153297831154608" />
+      <inertia
+        ixx="5.11678638010928E-06"
+        ixy="6.44942081162191E-07"
+        ixz="9.61066359301862E-11"
+        iyy="5.11652118479468E-06"
+        iyz="9.75769693992677E-11"
+        izz="4.47171272518641E-06" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://hexapod_walk/Hex_URDF2.SLDASM/meshes/leg2_link1.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://hexapod_walk/Hex_URDF2.SLDASM/meshes/leg2_link1.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="leg2_hip_joint"
+    type="revolute">
+    <origin
+      xyz="0.07591 0.14091 0"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="leg2_link1" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-1.57"
+      upper="1.57"
+      effort="10"
+      velocity="100" />
+  </joint>
+  <link
+    name="leg2_link2">
+    <inertial>
+      <origin
+        xyz="0.0138350441980606 0.0144780692008938 -0.00064755576516918"
+        rpy="0 0 0" />
+      <mass
+        value="0.0549729697479026" />
+      <inertia
+        ixx="1.15984737913327E-05"
+        ixy="-3.67806190810311E-07"
+        ixz="2.17280327715239E-07"
+        iyy="1.18174808048933E-05"
+        iyz="2.16921088739434E-07"
+        izz="1.65909216037551E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://hexapod_walk/Hex_URDF2.SLDASM/meshes/leg2_link2.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://hexapod_walk/Hex_URDF2.SLDASM/meshes/leg2_link2.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="leg2_knee_joint"
+    type="revolute">
+    <origin
+      xyz="0.03677 0.03677 0"
+      rpy="0 0 0" />
+    <parent
+      link="leg2_link1" />
+    <child
+      link="leg2_link2" />
+    <axis
+      xyz="-0.70711 0.70711 0" />
+    <limit
+      lower="-1.57"
+      upper="1.57"
+      effort="10"
+      velocity="100" />
+  </joint>
+  <link
+    name="leg2_link3">
+    <inertial>
+      <origin
+        xyz="0.0302080850389893 0.0308004685179082 -0.0292125400894977"
+        rpy="0 0 0" />
+      <mass
+        value="0.0782413429584607" />
+      <inertia
+        ixx="3.22872779023119E-05"
+        ixy="-6.21445767707829E-06"
+        ixz="7.59259502065884E-06"
+        iyy="3.25063556942754E-05"
+        iyz="7.59220394077899E-06"
+        izz="2.34916838691698E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://hexapod_walk/Hex_URDF2.SLDASM/meshes/leg2_link3.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://hexapod_walk/Hex_URDF2.SLDASM/meshes/leg2_link3.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="leg2_ankle_joint"
+    type="revolute">
+    <origin
+      xyz="0.045608 0.045608 -0.0145"
+      rpy="0 0 0" />
+    <parent
+      link="leg2_link2" />
+    <child
+      link="leg2_link3" />
+    <axis
+      xyz="-0.70711 0.70711 0" />
+    <limit
+      lower="-3.14"
+      upper="3.14"
+      effort="10"
+      velocity="100" />
+  </joint>
+  <link
+    name="leg3_link1">
+    <inertial>
+      <origin
+        xyz="-0.026 0.000520101604945172 -0.000520101604945146"
+        rpy="0 0 0" />
+      <mass
+        value="0.0153297863111444" />
+      <inertia
+        ixx="5.76159700021673E-06"
+        ixy="-1.33937113498178E-10"
+        ixz="-1.33937113502503E-10"
+        iyy="4.47171287798139E-06"
+        iyz="-1.03431026995556E-12"
+        izz="4.4717128779814E-06" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://hexapod_walk/Hex_URDF2.SLDASM/meshes/leg3_link1.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://hexapod_walk/Hex_URDF2.SLDASM/meshes/leg3_link1.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="leg3_hip_joint"
+    type="revolute">
+    <origin
+      xyz="-0.1185 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="leg3_link1" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-1.57"
+      upper="1.57"
+      effort="10"
+      velocity="100" />
+  </joint>
+  <link
+    name="leg3_link2">
+    <inertial>
+      <origin
+        xyz="-0.0200203964915778 -0.000454687553514402 -0.000647555723906074"
+        rpy="0 0 0" />
+      <mass
+        value="0.0549729722433595" />
+      <inertia
+        ixx="1.13401714795433E-05"
+        ixy="1.09504660286705E-07"
+        ixz="-3.07027660826979E-07"
+        iyy="1.20757854156115E-05"
+        iyz="2.54106080190521E-10"
+        izz="1.65909234944678E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://hexapod_walk/Hex_URDF2.SLDASM/meshes/leg3_link2.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://hexapod_walk/Hex_URDF2.SLDASM/meshes/leg3_link2.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="leg3_knee_joint"
+    type="revolute">
+    <origin
+      xyz="-0.052 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="leg3_link1" />
+    <child
+      link="leg3_link2" />
+    <axis
+      xyz="0 -1 0" />
+    <limit
+      lower="-1.57"
+      upper="1.57"
+      effort="10"
+      velocity="100" />
+  </joint>
+  <link
+    name="leg3_link3">
+    <inertial>
+      <origin
+        xyz="-0.0431395612339868 -0.000418878563802687 -0.0292125392221891"
+        rpy="0 0 0" />
+      <mass
+        value="0.078241345239874" />
+      <inertia
+        ixx="2.6182359398591E-05"
+        ixy="1.09538829469454E-07"
+        ixz="-1.07372743970462E-05"
+        iyy="3.86112746018646E-05"
+        iyz="2.76580343056706E-10"
+        izz="2.34916839705898E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://hexapod_walk/Hex_URDF2.SLDASM/meshes/leg3_link3.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://hexapod_walk/Hex_URDF2.SLDASM/meshes/leg3_link3.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="leg3_ankle_joint"
+    type="revolute">
+    <origin
+      xyz="-0.0645 0 -0.0145"
+      rpy="0 0 0" />
+    <parent
+      link="leg3_link2" />
+    <child
+      link="leg3_link3" />
+    <axis
+      xyz="0 -1 0" />
+    <limit
+      lower="-3.14"
+      upper="3.14"
+      effort="10"
+      velocity="100" />
+  </joint>
+  <link
+    name="leg4_link1">
+    <inertial>
+      <origin
+        xyz="0.026 -0.000520101604945103 -0.00052010160494517"
+        rpy="0 0 0" />
+      <mass
+        value="0.0153297863111444" />
+      <inertia
+        ixx="5.76159700021672E-06"
+        ixy="-1.3393711350125E-10"
+        ixz="1.33937113498044E-10"
+        iyy="4.47171287798138E-06"
+        iyz="1.034310271549E-12"
+        izz="4.47171287798139E-06" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://hexapod_walk/Hex_URDF2.SLDASM/meshes/leg4_link1.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://hexapod_walk/Hex_URDF2.SLDASM/meshes/leg4_link1.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="leg4_hip_joint"
+    type="revolute">
+    <origin
+      xyz="0.1185 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="leg4_link1" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-1.57"
+      upper="1.57"
+      effort="10"
+      velocity="100" />
+  </joint>
+  <link
+    name="leg4_link2">
+    <inertial>
+      <origin
+        xyz="0.0200203964915875 0.000454687553747234 -0.000647555723945525"
+        rpy="0 0 0" />
+      <mass
+        value="0.0549729722442632" />
+      <inertia
+        ixx="1.13401714797357E-05"
+        ixy="1.09504660177115E-07"
+        ixz="3.07027660850785E-07"
+        iyy="1.2075785415685E-05"
+        iyz="-2.54106040126059E-10"
+        izz="1.65909234947172E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://hexapod_walk/Hex_URDF2.SLDASM/meshes/leg4_link2.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://hexapod_walk/Hex_URDF2.SLDASM/meshes/leg4_link2.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="leg4_knee_joint"
+    type="revolute">
+    <origin
+      xyz="0.052 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="leg4_link1" />
+    <child
+      link="leg4_link2" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      lower="-1.57"
+      upper="1.57"
+      effort="10"
+      velocity="100" />
+  </joint>
+  <link
+    name="leg4_link3">
+    <inertial>
+      <origin
+        xyz="0.0431395612339866 0.000418878563802751 -0.0292125392221895"
+        rpy="0 0 0" />
+      <mass
+        value="0.0782413452398741" />
+      <inertia
+        ixx="2.61823593985911E-05"
+        ixy="1.09538829469438E-07"
+        ixz="1.07372743970462E-05"
+        iyy="3.86112746018646E-05"
+        iyz="-2.76580343047457E-10"
+        izz="2.34916839705897E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://hexapod_walk/Hex_URDF2.SLDASM/meshes/leg4_link3.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://hexapod_walk/Hex_URDF2.SLDASM/meshes/leg4_link3.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="leg4_ankle_joint"
+    type="revolute">
+    <origin
+      xyz="0.0645 0 -0.0145"
+      rpy="0 0 0" />
+    <parent
+      link="leg4_link2" />
+    <child
+      link="leg4_link3" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      lower="-3.14"
+      upper="3.14"
+      effort="10"
+      velocity="100" />
+  </joint>
+  <link
+    name="leg5_link1">
+    <inertial>
+      <origin
+        xyz="-0.018752535291974 -0.0180170002418232 -0.000520098314341616"
+        rpy="0 0 0" />
+      <mass
+        value="0.0153297831154609" />
+      <inertia
+        ixx="5.1167863801093E-06"
+        ixy="6.44942081162198E-07"
+        ixz="-9.61066359294356E-11"
+        iyy="5.1165211847947E-06"
+        iyz="-9.75769694017169E-11"
+        izz="4.47171272518644E-06" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://hexapod_walk/Hex_URDF2.SLDASM/meshes/leg5_link1.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://hexapod_walk/Hex_URDF2.SLDASM/meshes/leg5_link1.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="leg5_hip_joint"
+    type="revolute">
+    <origin
+      xyz="-0.07591 -0.14091 0"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="leg5_link1" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-1.57"
+      upper="1.57"
+      effort="10"
+      velocity="100" />
+  </joint>
+  <link
+    name="leg5_link2">
+    <inertial>
+      <origin
+        xyz="-0.013835044198145 -0.0144780692008077 -0.000647555765154906"
+        rpy="0 0 0" />
+      <mass
+        value="0.0549729697474317" />
+      <inertia
+        ixx="1.15984737912137E-05"
+        ixy="-3.67806190842368E-07"
+        ixz="-2.17280327720159E-07"
+        iyy="1.18174808048828E-05"
+        iyz="-2.16921088721814E-07"
+        izz="1.65909216036291E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://hexapod_walk/Hex_URDF2.SLDASM/meshes/leg5_link2.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://hexapod_walk/Hex_URDF2.SLDASM/meshes/leg5_link2.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="leg5_knee_joint"
+    type="revolute">
+    <origin
+      xyz="-0.03677 -0.03677 0"
+      rpy="0 0 0" />
+    <parent
+      link="leg5_link1" />
+    <child
+      link="leg5_link2" />
+    <axis
+      xyz="0.70711 -0.70711 0" />
+    <limit
+      lower="-1.57"
+      upper="1.57"
+      effort="10"
+      velocity="100" />
+  </joint>
+  <link
+    name="leg5_link3">
+    <inertial>
+      <origin
+        xyz="-0.0302080850392637 -0.0308004685179728 -0.0292125400897712"
+        rpy="0 0 0" />
+      <mass
+        value="0.0782413429576375" />
+      <inertia
+        ixx="3.22872779020944E-05"
+        ixy="-6.21445767713289E-06"
+        ixz="-7.5925950206702E-06"
+        iyy="3.25063556942522E-05"
+        iyz="-7.59220394073565E-06"
+        izz="2.34916838689469E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://hexapod_walk/Hex_URDF2.SLDASM/meshes/leg5_link3.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://hexapod_walk/Hex_URDF2.SLDASM/meshes/leg5_link3.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="leg5_ankle_joint"
+    type="revolute">
+    <origin
+      xyz="-0.045608 -0.045608 -0.0145"
+      rpy="0 0 0" />
+    <parent
+      link="leg5_link2" />
+    <child
+      link="leg5_link3" />
+    <axis
+      xyz="0.70711 -0.70711 0" />
+    <limit
+      lower="-3.14"
+      upper="3.14"
+      effort="10"
+      velocity="100" />
+  </joint>
+  <link
+    name="leg6_link1">
+    <inertial>
+      <origin
+        xyz="0.0180170002418231 -0.018752535291974 -0.000520098314341631"
+        rpy="0 0 0" />
+      <mass
+        value="0.0153297831154609" />
+      <inertia
+        ixx="5.1165211847947E-06"
+        ixy="-6.44942081162196E-07"
+        ixz="9.75769693912802E-11"
+        iyy="5.1167863801093E-06"
+        iyz="-9.61066359196518E-11"
+        izz="4.47171272518643E-06" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://hexapod_walk/Hex_URDF2.SLDASM/meshes/leg6_link1.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://hexapod_walk/Hex_URDF2.SLDASM/meshes/leg6_link1.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="leg6_hip_joint"
+    type="revolute">
+    <origin
+      xyz="0.07591 -0.14091 0"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="leg6_link1" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-1.57"
+      upper="1.57"
+      effort="10"
+      velocity="100" />
+  </joint>
+  <link
+    name="leg6_link2">
+    <inertial>
+      <origin
+        xyz="0.0144780692007814 -0.0138350441981685 -0.000647555765141287"
+        rpy="0 0 0" />
+      <mass
+        value="0.0549729697472944" />
+      <inertia
+        ixx="1.18174808048764E-05"
+        ixy="3.67806190850972E-07"
+        ixz="2.16921088708507E-07"
+        iyy="1.15984737911731E-05"
+        iyz="-2.17280327723447E-07"
+        izz="1.65909216035909E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://hexapod_walk/Hex_URDF2.SLDASM/meshes/leg6_link2.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://hexapod_walk/Hex_URDF2.SLDASM/meshes/leg6_link2.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="leg6_knee_joint"
+    type="revolute">
+    <origin
+      xyz="0.03677 -0.03677 0"
+      rpy="0 0 0" />
+    <parent
+      link="leg6_link1" />
+    <child
+      link="leg6_link2" />
+    <axis
+      xyz="0.70711 0.70711 0" />
+    <limit
+      lower="-1.57"
+      upper="1.57"
+      effort="10"
+      velocity="100" />
+  </joint>
+  <link
+    name="leg6_link3">
+    <inertial>
+      <origin
+        xyz="-0.158287971511079 0.223162858661374 -0.00168030397402165"
+        rpy="0 0 0" />
+      <mass
+        value="1.28977188145212" />
+      <inertia
+        ixx="0.0354475272652807"
+        ixy="-1.21250652432617E-05"
+        ixz="6.35354274752678E-11"
+        iyy="0.0360848028953241"
+        iyz="-1.72677212057566E-07"
+        izz="0.0687120716801501" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://hexapod_walk/Hex_URDF2.SLDASM/meshes/leg6_link3.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://hexapod_walk/Hex_URDF2.SLDASM/meshes/leg6_link3.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="leg6_ankle_joint"
+    type="revolute">
+    <origin
+      xyz="0.045608 -0.045608 -0.0145"
+      rpy="0 0 0" />
+    <parent
+      link="leg6_link2" />
+    <child
+      link="leg6_link3" />
+    <axis
+      xyz="0.70711 0.70711 0" />
+    <limit
+      lower="-3.14"
+      upper="3.14"
+      effort="10"
+      velocity="100" />
+  </joint>
+  
+  <gazebo>
+    <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+      <robotNamespace>/</robotNamespace>
+    </plugin>
+  </gazebo>
+</robot>

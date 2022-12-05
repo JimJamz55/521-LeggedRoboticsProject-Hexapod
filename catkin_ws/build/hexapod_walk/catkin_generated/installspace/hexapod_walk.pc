@@ -1,0 +1,8 @@
+prefix=/home/james/rbe521/catkin_ws/install
+
+Name: hexapod_walk
+Description: Description of hexapod_walk
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 
