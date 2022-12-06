@@ -13,6 +13,6 @@
              />
 
   <node name="controller_spawner" pkg="controller_manager" type="spawner"
-    output="screen" ns="/hexapod" args="joint_state_controller  Leg1_ankle_joint_pos_con
+    output="screen" ns="/hexapod" args="joint_state_controller leg1_hip_joint_pos_con leg1_knee_joint_pos_con Leg1_ankle_joint_pos_con
           --shutdown-timeout 3"/>
 </launch>
