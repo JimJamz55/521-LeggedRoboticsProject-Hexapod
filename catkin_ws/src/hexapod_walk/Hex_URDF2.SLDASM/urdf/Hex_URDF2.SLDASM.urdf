@@ -109,7 +109,7 @@
       <mechanicalReduction>1</mechanicalReduction>
     </actuator>
     <joint name="leg1_hip_joint">
-      <hardwareInterface>PositionJointInterface</hardwareInterface>
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
     </joint>
   </transmission>
   
@@ -178,7 +178,7 @@
       <mechanicalReduction>1</mechanicalReduction>
     </actuator>
     <joint name="leg1_knee_joint">
-      <hardwareInterface>PositionJointInterface</hardwareInterface>
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
     </joint>
   </transmission>
   
@@ -247,7 +247,7 @@
       <mechanicalReduction>1</mechanicalReduction>
     </actuator>
     <joint name="Leg1_ankle_joint">
-      <hardwareInterface>PositionJointInterface</hardwareInterface>
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
     </joint>
   </transmission>
   
@@ -1124,7 +1124,8 @@
   
   <gazebo>
     <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
-      <robotNamespace>/</robotNamespace>
+      <robotNamespace>/hexapod</robotNamespace>
+      <!--robotSimType>gazebo_ros_control/DefaultRobotWHSim</robotSimType-->
     </plugin>
   </gazebo>
 </robot>
