@@ -309,6 +309,17 @@
       effort="10"
       velocity="100" />
   </joint>
+  
+  <transmission name="leg2_hip_joint">
+    <type>transmission_interface/SimpleTransmission</type>
+    <actuator name="$leg2_hip_joint">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+    <joint name="leg2_hip_joint">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+    </joint>
+  </transmission>
+  
   <link
     name="leg2_link2">
     <inertial>
@@ -367,6 +378,17 @@
       effort="10"
       velocity="100" />
   </joint>
+  
+  <transmission name="leg2_knee_joint">
+    <type>transmission_interface/SimpleTransmission</type>
+    <actuator name="$leg2_knee_joint">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+    <joint name="leg2_knee_joint">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+    </joint>
+  </transmission>
+  
   <link
     name="leg2_link3">
     <inertial>
@@ -425,6 +447,17 @@
       effort="10"
       velocity="100" />
   </joint>
+  
+  <transmission name="leg2_ankle_joint">
+    <type>transmission_interface/SimpleTransmission</type>
+    <actuator name="$leg2_ankle_joint">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+    <joint name="leg2_ankle_joint">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+    </joint>
+  </transmission>
+  
   <link
     name="leg3_link1">
     <inertial>
