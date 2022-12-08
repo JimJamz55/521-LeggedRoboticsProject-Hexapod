@@ -205,3 +205,6 @@ include_directories(
 catkin_install_python(PROGRAMS scripts/main.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
+catkin_install_python(PROGRAMS scripts/hex_IK.py
+  DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+)

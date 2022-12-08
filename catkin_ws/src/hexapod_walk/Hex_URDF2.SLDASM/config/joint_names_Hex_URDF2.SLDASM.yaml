@@ -1,112 +1,112 @@
 hexapod:
  joint_state_controller:
   type: joint_state_controller/JointStateController
-  publish_rate: 50
+  publish_rate: 100
   
  leg1_hip_joint_pos_con:
   type: effort_controllers/JointPositionController
   joint: leg1_hip_joint
-  pid: {p: 10.0, i: 0.00, d: 0.01}
+  pid: {p: 20.0, i: 0.0, d: 0.01}
  leg1_knee_joint_pos_con:
   type: effort_controllers/JointPositionController
   joint: leg1_knee_joint
-  pid: {p: 10.0, i: 0.00, d: 0.01}
+  pid: {p: 20.0, i: 0.0, d: 0.01}
  Leg1_ankle_joint_pos_con:
   type: effort_controllers/JointPositionController
   joint: Leg1_ankle_joint
-  pid: {p: 10.0, i: 0.00, d: 0.01}
+  pid: {p: 20.0, i: 0.0, d: 0.01}
  leg2_hip_joint_pos_con:
   type: effort_controllers/JointPositionController
   joint: leg2_hip_joint
-  pid: {p: 10.0, i: 0.00, d: 0.01}
+  pid: {p: 20.0, i: 0.0, d: 0.01}
  leg2_knee_joint_pos_con:
   type: effort_controllers/JointPositionController
   joint: leg2_knee_joint
-  pid: {p: 10.0, i: 0.00, d: 0.01}
+  pid: {p: 20.0, i: 0.0, d: 0.01}
  leg2_ankle_joint_pos_con:
   type: effort_controllers/JointPositionController
   joint: leg2_ankle_joint
-  pid: {p: 10.0, i: 0.00, d: 0.01}
+  pid: {p: 20.0, i: 0.0, d: 0.01}
  leg3_hip_joint_pos_con:
   type: effort_controllers/JointPositionController
   joint: leg3_hip_joint
-  pid: {p: 10.0, i: 0.00, d: 0.01}
+  pid: {p: 20.0, i: 0.0, d: 0.01}
  leg3_knee_joint_pos_con:
   type: effort_controllers/JointPositionController
   joint: leg3_knee_joint
-  pid: {p: 10.0, i: 0.00, d: 0.01}
+  pid: {p: 20.0, i: 0.0, d: 0.01}
  leg3_ankle_joint_pos_con:
   type: effort_controllers/JointPositionController
   joint: leg3_ankle_joint
-  pid: {p: 10.0, i: 0.00, d: 0.01}
+  pid: {p: 20.0, i: 0.0, d: 0.01}
  leg4_hip_joint_pos_con:
   type: effort_controllers/JointPositionController
   joint: leg4_hip_joint
-  pid: {p: 10.0, i: 0.00, d: 0.01}
+  pid: {p: 20.0, i: 0.0, d: 0.01}
  leg4_knee_joint_pos_con:
   type: effort_controllers/JointPositionController
   joint: leg4_knee_joint
-  pid: {p: 10.0, i: 0.00, d: 0.01}
+  pid: {p: 20.0, i: 0.0, d: 0.01}
  leg4_ankle_joint_pos_con:
   type: effort_controllers/JointPositionController
   joint: leg4_ankle_joint
-  pid: {p: 10.0, i: 0.00, d: 0.01}
+  pid: {p: 20.0, i: 0.0, d: 0.01}
  leg5_hip_joint_pos_con:
   type: effort_controllers/JointPositionController
   joint: leg5_hip_joint
-  pid: {p: 10.0, i: 0.00, d: 0.01}
+  pid: {p: 20.0, i: 0.0, d: 0.01}
  leg5_knee_joint_pos_con:
   type: effort_controllers/JointPositionController
   joint: leg5_knee_joint
-  pid: {p: 10.0, i: 0.00, d: 0.01}
+  pid: {p: 20.0, i: 0.0, d: 0.01}
  leg5_ankle_joint_pos_con:
   type: effort_controllers/JointPositionController
   joint: leg5_ankle_joint
-  pid: {p: 10.0, i: 0.00, d: 0.01}
+  pid: {p: 20.0, i: 0.0, d: 0.01}
  leg6_hip_joint_pos_con:
   type: effort_controllers/JointPositionController
   joint: leg6_hip_joint
-  pid: {p: 10.0, i: 0.00, d: 0.01}
+  pid: {p: 20.0, i: 0.0, d: 0.01}
  leg6_knee_joint_pos_con:
   type: effort_controllers/JointPositionController
   joint: leg6_knee_joint
-  pid: {p: 10.0, i: 0.00, d: 0.01}
+  pid: {p: 20.0, i: 0.0, d: 0.01}
  leg6_ankle_joint_pos_con:
   type: effort_controllers/JointPositionController
   joint: leg6_ankle_joint
-  pid: {p: 10.0, i: 0.00, d: 0.01}
+  pid: {p: 20.0, i: 0.0, d: 0.01}
 
 #hexapod:
 # joint_state_controller:
 #  type: "joint_state_controller/JointStateController"
-#  publish_rate: 50
+#  publish_rate: 20
 
 # leg1_hip_joint_pos_con:
 #  type: effort_controllers/JointPositionController
 #  joint: leg1_hip_joint
-#  pid: {p: 100.0, i: 0.01, d: 10.0}
+#  pid: {p: 200.0, i: 0.0, d: 20.0}
 # leg1_knee_joint_pos_con:
 #  type: effort_controllers/JointPositionController
 #  joint: leg1_knee_joint
-#  pid: {p: 100.0, i: 0.01, d: 10.0}
+#  pid: {p: 200.0, i: 0.0, d: 20.0}
 # Leg1_ankle_joint_pos_con:
 #  type: effort_controllers/JointPositionController
 #  joint: Leg1_ankle_joint
-#  pid: {p: 100.0, i: 0.01, d: 10.0}
+#  pid: {p: 200.0, i: 0.0, d: 20.0}
 #/gazebo_ros_control:   
 #  pid_gains:
 #    leg1_hip_joint:
-#      p: 100.0
-#      i: 0.01
-#      d: 10.0
+#      p: 200.0
+#      i: 0.0
+#      d: 20.0
     #leg1_knee_joint:
-    #  p: 100.0
-    #  i: 0.01
-    #  d: 10.0
+    #  p: 200.0
+    #  i: 0.0
+    #  d: 20.0
     #Leg1_ankle_joint:
-    #  p: 100.0
-    #  i: 0.01
-    #  d: 10.0
+    #  p: 200.0
+    #  i: 0.0
+    #  d: 20.0
 
 #type: "position_controllers/JointPositionController"
 #joint: leg1_hip_joint 

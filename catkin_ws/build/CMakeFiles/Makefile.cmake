@@ -17,6 +17,7 @@ set(CMAKE_MAKEFILE_DEPENDS
   "/home/james/rbe521/catkin_ws/src/CMakeLists.txt"
   "/home/james/rbe521/catkin_ws/src/hexapod_walk/CMakeLists.txt"
   "/home/james/rbe521/catkin_ws/src/hexapod_walk/package.xml"
+  "/home/james/rbe521/catkin_ws/src/hexapod_walk/scripts/hex_IK.py"
   "/home/james/rbe521/catkin_ws/src/hexapod_walk/scripts/main.py"
   "/opt/ros/noetic/share/catkin/cmake/all.cmake"
   "/opt/ros/noetic/share/catkin/cmake/assert.cmake"

@@ -1,0 +1,135 @@
+import math
+from math import pi, cos, sin, tan, acos, asin, atan2, sqrt
+
+import numpy as np
+
+def hex_IK(P):
+    l1 = 52 # coxa in mm
+    l2 = 66.11 # femur in mm
+    l3 = 158.69 # tibian in mm
+
+    # Euler Angles a,b,c, in rad
+    a = P[3] * pi/180
+    b = P[4] * pi/180
+    c = P[5] * pi/180
+
+    Rxa = np.array([[1, 0, 0], [0, cos(a), -sin(a)], [0, sin(a), cos(a)]])
+    Ryb = np.array([[cos(b), 0, sin(b)], [0, 1, 0], [-sin(b), 0, cos(b)]])
+    Rzc = np.array([[cos(c), -sin(c), 0], [sin(c), cos(c), 0], [0, 0, 1]])
+
+    R = np.dot(Rxa,Ryb)
+    R = np.dot(R,Rzc)
+
+    # vector from global origin to local origin
+    o = np.array([[P[0]],[P[1]],[P[2]]])
+
+    # matrix of hip joint positions wrt local origin
+    s = np.array([[-75.91, 75.91, -118.5, 118.5, -75.91, 75.91],
+                 [140.91, 140.91, 0, 0, -140.91, -140.91],
+                 [0, 0, 0, 0, 0, 0]])
+
+    # matrix of home foot positions wrt global origin
+    u = np.array([[-233.806, 233.806, -341.8, 341.8, -233.806, 233.806],
+                [298.806, 298.806, 0, 0, -298.806, -298.806],
+                [0, 0, 0, 0, 0, 0]])
+
+    # calculating li
+    l = np.zeros((3,6))
+    for i in range(6):
+        si = np.array([[s[0][i]], [s[1][i]], [s[2][i]]])
+        ui = np.array([[u[0][i]], [u[1][i]], [u[2][i]]])
+
+        #l[:,i] = o + np.dot(R,si) - ui
+
+        li = o + np.dot(R,si) - ui
+
+        l[0][i] = li[0]
+        l[1][i] = li[1]
+        l[2][i] = li[2]
+
+    # print(l)
+
+    # using x and y component of li to calculate alpha
+    alpha = np.zeros((1, 6))
+    for i in range(6):
+        alpha[0][i] = atan2(l[1][i], l[0][i])
+
+    # # wraping alpha + pi
+    alpha = alpha + np.array([[pi], [pi], [pi], [pi], [pi], [pi]])
+
+    # wrapping alpha to pi
+    real_alpha = np.zeros((1, 6))
+    for i in range(6):
+        ang = alpha[0][i]
+        while ang > pi:
+            ang = ang - 2*pi
+        while ang < -pi:
+            ang = ang + 2*pi
+        real_alpha[0][i] = ang
+
+    # print(real_alpha)
+
+    # # solving for si2
+    s2 = np.zeros((3,6))
+    for i in range(6):
+        l1_i = np.array([[l1*cos(real_alpha[0][i])],
+                         [l1*sin(real_alpha[0][i])],
+                         [0]])
+        si = np.array([[s[0][i]], [s[1][i]], [s[2][i]]])
+        s2i = si + l1_i
+
+        s2[0][i] = s2i[0]
+        s2[1][i] = s2i[1]
+        s2[2][i] = s2i[2]
+
+        #s2[:,i] = si + l1_i
+
+    # print(s2)
+
+    # solving for li'
+    l_prime = np.zeros((3,6))
+    for i in range(6):
+        s2i = np.array([[s2[0][i]], [s2[1][i]], [s2[2][i]]])
+        ui = np.array([[u[0][i]], [u[1][i]], [u[2][i]]])
+
+        l_p = o + np.dot(R, s2i) - ui
+
+        l_prime[0][i] = l_p[0]
+        l_prime[1][i] = l_p[1]
+        l_prime[2][i] = l_p[2]
+
+        #l_prime[:,i] = o + np.dot(R, s2i) - ui
+
+    # print(l_prime)
+
+    # solving for gamma
+    gamma = np.zeros((1,6))
+    for i in range(6):
+        gamma[0][i] = pi - acos((l2**2 + l3**2 - np.linalg.norm(l_prime[:,i])**2) / (2 * l2 * l3))
+
+    # print(gamma)
+
+    # solving for phi
+    phi = np.zeros((1,6))
+    for i in range(6):
+        phi[0][i] = asin((l_prime[2][i] - l[2][i]) / l1)
+
+    # print(phi)
+
+    # solving for rho
+    rho = np.zeros((1,6))
+    for i in range(6):
+        rho[0][i] = atan2(l_prime[2][i], sqrt(l_prime[0][i]**2 + l_prime[1][i]**2))
+
+    # solving for beta (ankle joint)
+    beta = np.zeros((1,6))
+    for i in range(6):
+        beta[0][i] = acos((l2**2 + np.linalg.norm(l_prime[:,i])**2 - l3**2) / (2*l2*np.linalg.norm(l_prime[:,i]))) - (rho[0][i] + phi[0][i])
+
+    # print(real_alpha)
+    # print(beta)
+    # print(gamma)
+    return alpha, beta, gamma
+
+#P = np.array([5, 5, 132.32, 0, 0, 0])
+#hex_IK(P)
