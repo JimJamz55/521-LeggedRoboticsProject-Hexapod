@@ -52,3 +52,7 @@ if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/hexapod_walk" TYPE FILE FILES "/home/james/rbe521/catkin_ws/src/hexapod_walk/package.xml")
 endif()
 
+if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/hexapod_walk" TYPE PROGRAM FILES "/home/james/rbe521/catkin_ws/build/hexapod_walk/catkin_generated/installspace/main.py")
+endif()
+
