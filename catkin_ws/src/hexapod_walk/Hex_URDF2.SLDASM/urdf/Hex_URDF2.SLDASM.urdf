@@ -516,6 +516,17 @@
       effort="10"
       velocity="100" />
   </joint>
+  
+  <transmission name="leg3_hip_joint">
+    <type>transmission_interface/SimpleTransmission</type>
+    <actuator name="$leg3_hip_joint">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+    <joint name="leg3_hip_joint">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+    </joint>
+  </transmission>
+  
   <link
     name="leg3_link2">
     <inertial>
@@ -574,6 +585,17 @@
       effort="10"
       velocity="100" />
   </joint>
+  
+  <transmission name="leg3_knee_joint">
+    <type>transmission_interface/SimpleTransmission</type>
+    <actuator name="$leg3_knee_joint">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+    <joint name="leg3_knee_joint">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+    </joint>
+  </transmission>
+  
   <link
     name="leg3_link3">
     <inertial>
@@ -632,6 +654,17 @@
       effort="10"
       velocity="100" />
   </joint>
+  
+  <transmission name="leg3_ankle_joint">
+    <type>transmission_interface/SimpleTransmission</type>
+    <actuator name="$leg3_ankle_joint">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+    <joint name="leg3_ankle_joint">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+    </joint>
+  </transmission>
+  
   <link
     name="leg4_link1">
     <inertial>
@@ -690,6 +723,17 @@
       effort="10"
       velocity="100" />
   </joint>
+  
+  <transmission name="leg4_hip_joint">
+    <type>transmission_interface/SimpleTransmission</type>
+    <actuator name="$leg4_hip_joint">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+    <joint name="leg4_hip_joint">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+    </joint>
+  </transmission>
+  
   <link
     name="leg4_link2">
     <inertial>
@@ -748,6 +792,17 @@
       effort="10"
       velocity="100" />
   </joint>
+  
+  <transmission name="leg4_knee_joint">
+    <type>transmission_interface/SimpleTransmission</type>
+    <actuator name="$leg4_knee_joint">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+    <joint name="leg4_knee_joint">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+    </joint>
+  </transmission>
+  
   <link
     name="leg4_link3">
     <inertial>
@@ -806,6 +861,17 @@
       effort="10"
       velocity="100" />
   </joint>
+  
+  <transmission name="leg4_ankle_joint">
+    <type>transmission_interface/SimpleTransmission</type>
+    <actuator name="$leg4_ankle_joint">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+    <joint name="leg4_ankle_joint">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+    </joint>
+  </transmission>
+  
   <link
     name="leg5_link1">
     <inertial>
@@ -864,6 +930,17 @@
       effort="10"
       velocity="100" />
   </joint>
+  
+  <transmission name="leg5_hip_joint">
+    <type>transmission_interface/SimpleTransmission</type>
+    <actuator name="$leg5_hip_joint">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+    <joint name="leg5_hip_joint">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+    </joint>
+  </transmission>
+  
   <link
     name="leg5_link2">
     <inertial>
@@ -922,6 +999,17 @@
       effort="10"
       velocity="100" />
   </joint>
+  
+  <transmission name="leg5_knee_joint">
+    <type>transmission_interface/SimpleTransmission</type>
+    <actuator name="$leg5_knee_joint">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+    <joint name="leg5_knee_joint">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+    </joint>
+  </transmission>
+  
   <link
     name="leg5_link3">
     <inertial>
@@ -980,6 +1068,17 @@
       effort="10"
       velocity="100" />
   </joint>
+  
+  <transmission name="leg5_ankle_joint">
+    <type>transmission_interface/SimpleTransmission</type>
+    <actuator name="$leg5_ankle_joint">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+    <joint name="leg5_ankle_joint">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+    </joint>
+  </transmission>
+  
   <link
     name="leg6_link1">
     <inertial>
@@ -1038,6 +1137,17 @@
       effort="10"
       velocity="100" />
   </joint>
+  
+  <transmission name="leg6_hip_joint">
+    <type>transmission_interface/SimpleTransmission</type>
+    <actuator name="$leg6_hip_joint">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+    <joint name="leg6_hip_joint">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+    </joint>
+  </transmission>
+  
   <link
     name="leg6_link2">
     <inertial>
@@ -1096,6 +1206,17 @@
       effort="10"
       velocity="100" />
   </joint>
+  
+  <transmission name="leg6_knee_joint">
+    <type>transmission_interface/SimpleTransmission</type>
+    <actuator name="$leg6_knee_joint">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+    <joint name="leg6_knee_joint">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+    </joint>
+  </transmission>
+  
   <link
     name="leg6_link3">
     <inertial>
@@ -1154,6 +1275,16 @@
       effort="10"
       velocity="100" />
   </joint>
+  
+  <transmission name="leg6_ankle_joint">
+    <type>transmission_interface/SimpleTransmission</type>
+    <actuator name="$leg6_ankle_joint">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+    <joint name="leg6_ankle_joint">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+    </joint>
+  </transmission>
   
   <gazebo>
     <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
