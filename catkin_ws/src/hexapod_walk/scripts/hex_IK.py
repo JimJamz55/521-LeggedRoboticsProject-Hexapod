@@ -129,7 +129,13 @@ def hex_IK(P):
     # print(real_alpha)
     # print(beta)
     # print(gamma)
-    return alpha, beta, gamma
+    real_alpha = real_alpha - [2.35619449, 0.78539816, 3.14159265, 6.28318531, 3.92699082, 5.49778714]
+    
+    beta = beta - [-0.22988272, -0.22988272, -0.22990677, -0.22990677, -0.22988272, -0.22988272]
+    
+    gamma = gamma - [0.60155288, 0.60155288, 0.60151436, 0.60151436, 0.60155288, 0.60155288]
+    
+    return real_alpha, beta, gamma
 
 #P = np.array([5, 5, 132.32, 0, 0, 0])
 #hex_IK(P)
