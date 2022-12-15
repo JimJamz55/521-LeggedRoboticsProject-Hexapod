@@ -6,6 +6,7 @@ from std_msgs.msg import Float64
 import time
 import numpy as np
 from hex_IK import *
+from trajectory import *
     
 class hexapod_controller():
     def __init__(self):
@@ -39,31 +40,30 @@ class hexapod_controller():
         time.sleep(1)
         
         #initialize leg positions
-        self.leg1_hip_joint_pos_con.publish(0)
-        self.leg2_hip_joint_pos_con.publish(0)
+        self.leg1_hip_joint_pos_con.publish(0.66399)
+        self.leg2_hip_joint_pos_con.publish(-0.66399)
         self.leg3_hip_joint_pos_con.publish(0)
         self.leg4_hip_joint_pos_con.publish(0)
-        self.leg5_hip_joint_pos_con.publish(0)
-        self.leg6_hip_joint_pos_con.publish(0)
+        self.leg5_hip_joint_pos_con.publish(-0.6639)
+        self.leg6_hip_joint_pos_con.publish(0.6639)
 
     def control_loop(self):
-        for i in np.arange(-0.5, 0, 0.001):
+        for i in np.arange(-0.5, 0.1745, 0.001):
             self.leg1_knee_joint_pos_con.publish(i)
             self.leg2_knee_joint_pos_con.publish(i)
             self.leg3_knee_joint_pos_con.publish(i)
             self.leg4_knee_joint_pos_con.publish(i)
             self.leg5_knee_joint_pos_con.publish(i)
             self.leg6_knee_joint_pos_con.publish(i)
-            
+        for i in np.arange(-0.5, 0.1745, 0.001):
             self.leg1_ankle_joint_pos_con.publish(i)
             self.leg2_ankle_joint_pos_con.publish(i)
             self.leg3_ankle_joint_pos_con.publish(i)
             self.leg4_ankle_joint_pos_con.publish(i)
             self.leg5_ankle_joint_pos_con.publish(i)
             self.leg6_ankle_joint_pos_con.publish(i)
-    
-        P = np.array([5, 5, 132.32, 0, 0, 0])
-        hex_IK(P)
+        
+        
 
 
 if __name__ == '__main__':
