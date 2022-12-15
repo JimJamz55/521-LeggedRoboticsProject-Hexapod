@@ -51,21 +51,56 @@ class hexapod_controller():
     		
 	def control_loop(self):
 	    P = [0, 0, 80, 0, 0, 0]
-	    forward = True
-	    while(1):
-	    	if (forward == True):
-	    		P[0] = P[0] + 0.2
-	    	else:
-	    		P[0] = P[0] - 0.2
-	    	if (P[0] >30):
-	    		forward = False
-	    	if (P[0] < -30):
-	    		forward = True
-	    	print("Y pos: " + str(P[1]))
+	    #forward = True
+	    
+	    u_traj = np.array([[0.0, 0.0, 0.0, 0.0, 0.0, 0.0],
+                [0.0, 0.0, 0.0, 0.0, 0.0, 0.0],
+                [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]])
+	    		
+	    #print(u_traj[0][1])	    		
+	    #print(type(u_traj))
+	    startTime = rospy.get_time()
+	    #print(startTime + 10)
+	    strideHeight = 40
+	    strideLength = 10
+	    speed = 4
+
+	    while(rospy.get_time()< startTime + pi):
+	    	#print(rospy.get_time())
+	    	#print(startTime + 5)
+	    	simTime = rospy.get_time() - startTime
+	    	print(simTime)
+	    	
+	    	#u_traj[2][0] = 50
+	    	
+	    	#print(sin(simTime)*2.5)
+	    	z_comp_traj = -sin(simTime*speed)*strideHeight
+	    	if z_comp_traj<0:
+	    		u_traj[2][0] = z_comp_traj
+	    	#	print("u_z Component: " +str(sin(simTime)*strideHeight))
+	    		u_traj[1][0] = u_traj[1][0] - 0.1
+	    		print("u_y Component: " + str(u_traj[1][0]))
+	    #	print(rospy.get_rostime() - seconds)
+	    	#print(i)
+	    	#if sin(simTime - pi/2) < 0:
+	    	#	u_traj[2][0] = -sin(simTime*2)*strideLength
+	    	#	print("u_y Component: " +str(sin(simTime*2)*strideLength))
+	    	#u_traj[1][0] = -sin(simTime-pi/2)*40
+	    	#print(u_traj[2][0])
+	    	#u_traj[2][0] = u_traj[2][0] - sin()
+	    #	if (forward == True):
+	    #		P[0] = P[0] + 0.2
+	    #	else:
+	    #		P[0] = P[0] - 0.2
+	    #	if (P[0] >30):
+	    #		forward = False
+	    #	if (P[0] < -30):
+	    #		forward = True
+	    #	print("Y pos: " + str(P[1]))
 	    #P = [0, 0, 132.32, 0, 0, 0]
 	    #P = [0, 50, 80, 0, 0, 0]
 	    
-	    	joints = hex_IK(P)
+	    	joints = hex_IK(P, u_traj)
 	    
 	    #print("alpha: " + str(joints[0][0]))
 	    
@@ -74,7 +109,7 @@ class hexapod_controller():
 	    
 	    	joints[1][0] = -joints[1][0]
 		
-	    #print("alpha: " + str(joints[0][0]))
+	    	#print("alpha: " + str(joints[0][0][0]))
 	    #print("beta: " + str(joints[1][0]))
 	    #print("gamma: " + str(joints[2][0]))
 		
