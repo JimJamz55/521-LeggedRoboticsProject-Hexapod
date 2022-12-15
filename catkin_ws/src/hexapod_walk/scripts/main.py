@@ -62,24 +62,72 @@ class hexapod_controller():
 	    startTime = rospy.get_time()
 	    #print(startTime + 10)
 	    strideHeight = 40
-	    strideLength = 10
+	    strideLength = 150
 	    speed = 4
 
-	    while(rospy.get_time()< startTime + pi):
+	    strideTime = 0.25
+
+	    while(rospy.get_time()< startTime + 6*strideTime):
+	    
+
 	    	#print(rospy.get_time())
 	    	#print(startTime + 5)
 	    	simTime = rospy.get_time() - startTime
-	    	print(simTime)
+	    	print("Sim Time: " + str(simTime))
+	    	
+	    	P[1] = (simTime/(strideTime*6))*strideLength/2
+	    	print(P[1])
+	    	
+	    	#sin starts from 0
+	    	#ends at pi
+	    	#scale strideTime to match
+	    	if simTime > 0 and simTime < strideTime:
+	    		u_traj[2][0] = -sin(pi*simTime/strideTime)*strideHeight
+	    	#print(u_traj[2][0])
+	    	
+	    		u_traj[1][0] = strideLength*(simTime/strideTime)
+	    		
+	    	if simTime > strideTime and simTime < 2*strideTime:
+	    		u_traj[2][1] = -sin(pi*(simTime-strideTime)/strideTime)*strideHeight
+	    	#print(u_traj[2][0])
+	    	
+	    		u_traj[1][1] = strideLength*((simTime-strideTime)/strideTime)
+	    		
+	    	if simTime > 2*strideTime and simTime < 3*strideTime:
+	    		u_traj[2][2] = -sin(pi*(simTime-(2*strideTime))/strideTime)*strideHeight
+	    	#print(u_traj[2][0])
+	    	
+	    		u_traj[1][2] = strideLength*((simTime-(2*strideTime))/strideTime)
+	    		
+	    	if simTime > 3*strideTime and simTime < 4*strideTime:
+	    		u_traj[2][3] = -sin(pi*(simTime-(3*strideTime))/strideTime)*strideHeight
+	    	#print(u_traj[2][0])
+	    	
+	    		u_traj[1][3] = strideLength*((simTime-(3*strideTime))/strideTime)
+	    		
+	    	if simTime > 4*strideTime and simTime < 5*strideTime:
+	    		u_traj[2][4] = -sin(pi*(simTime-(4*strideTime))/strideTime)*strideHeight
+	    	#print(u_traj[2][0])
+	    	
+	    		u_traj[1][4] = strideLength*((simTime-(4*strideTime))/strideTime)
+	    		print("y Component leg5: " + str(u_traj[1][4]))
+	    	if simTime > 5*strideTime and simTime < 6*strideTime:
+	    		u_traj[2][5] = -sin(pi*(simTime-(5*strideTime))/strideTime)*strideHeight
+	    	#print(u_traj[2][0])
+	    	
+	    		u_traj[1][5] = strideLength*((simTime-(5*strideTime))/strideTime)
+
+	    	#print("y Component: " + str(u_traj[1][1]))
 	    	
 	    	#u_traj[2][0] = 50
 	    	
 	    	#print(sin(simTime)*2.5)
-	    	z_comp_traj = -sin(simTime*speed)*strideHeight
-	    	if z_comp_traj<0:
-	    		u_traj[2][0] = z_comp_traj
+	    	#z_comp_traj = -sin(simTime*speed)*strideHeight
+	    	#if z_comp_traj<0:
+	    	#	u_traj[2][0] = z_comp_traj
 	    	#	print("u_z Component: " +str(sin(simTime)*strideHeight))
-	    		u_traj[1][0] = u_traj[1][0] - 0.1
-	    		print("u_y Component: " + str(u_traj[1][0]))
+	    	#	u_traj[1][0] = simTime*speed
+	    	#	print("u_y Component: " + str(u_traj[1][0]))
 	    #	print(rospy.get_rostime() - seconds)
 	    	#print(i)
 	    	#if sin(simTime - pi/2) < 0:
