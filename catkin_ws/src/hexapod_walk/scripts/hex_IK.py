@@ -3,7 +3,7 @@ from math import pi, cos, sin, tan, acos, asin, atan2, sqrt
 
 import numpy as np
 
-def hex_IK(P):
+def hex_IK(P, u_traj):
     l1 = 52 # coxa in mm
     l2 = 66.11 # femur in mm
     l3 = 158.69 # tibian in mm
@@ -37,7 +37,10 @@ def hex_IK(P):
     l = np.zeros((3,6))
     for i in range(6):
         si = np.array([[s[0][i]], [s[1][i]], [s[2][i]]])
-        ui = np.array([[u[0][i]], [u[1][i]], [u[2][i]]])
+        ui = np.array([[u[0][i] + [u_traj[0][i]]], [u[1][i] + u_traj[1][i]], [u[2][i] + [u_traj[2][i]]]])
+        #print("ui")
+        #print(ui)
+        #ui = np.add(np.array([[u[0][i]], [u[1][i]], [u[2][i]]]), [u_traj[i][0], u_traj[i][1], u_traj[i][2]])
 
         #l[:,i] = o + np.dot(R,si) - ui
 
