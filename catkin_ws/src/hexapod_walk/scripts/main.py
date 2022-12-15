@@ -74,19 +74,16 @@ def homeposition(angle4):
     leg4_hip_joint_pos_con = rospy.Publisher('/hexapod/leg4_hip_joint_pos_con/command', Float64, queue_size=10)
     leg5_hip_joint_pos_con = rospy.Publisher('/hexapod/leg5_hip_joint_pos_con/command', Float64, queue_size=10)
     leg6_hip_joint_pos_con = rospy.Publisher('/hexapod/leg6_hip_joint_pos_con/command', Float64, queue_size=10)
-    leg1_hip_joint_pos_con.publish(angle4[0][1])
-
-    #time.sleep(0.1)
-    leg2_hip_joint_pos_con.publish(angle4[1][1])
-    #time.sleep(0.1)
-    leg3_hip_joint_pos_con.publish(angle4[2][1])
-    #time.sleep(0.1)
-    leg4_hip_joint_pos_con.publish(angle4[3][1])
-    #time.sleep(0.1)
-    leg5_hip_joint_pos_con.publish(angle4[4][1])
-    #time.sleep(0.1)
-    leg6_hip_joint_pos_con.publish(angle4[5][1])
-    #time.sleep(0.1)
+    print('retrocediendo',angle4[0][0])
+    for i in np.arange(0, 0.5221, 0.001):
+            leg1_hip_joint_pos_con.publish(angle4[0][0]-i)
+            leg2_hip_joint_pos_con.publish(angle4[1][0]+i)
+            leg3_hip_joint_pos_con.publish(angle4[2][0]-i)
+            leg4_hip_joint_pos_con.publish(angle4[3][0]+i)
+            leg5_hip_joint_pos_con.publish(angle4[4][0]-i)
+            leg6_hip_joint_pos_con.publish(angle4[0][0]+i)
+            time.sleep(0.02)
+    print('position final',angle4[0][0]-i)
 
 def hexapod_controlinit(leg1,location1,leg2,location2):
     rospy.init_node('Hexapod_controller', anonymous=True)
@@ -145,13 +142,14 @@ def hexapod_controlinit(leg1,location1,leg2,location2):
         timeactual = time.time()
         t = timeactual-time0
         (xd1,zd1,xdp1,zdp1) = semicircle(A,t,0.5*L) #patas 2,4,6
-        (xd2,zd2,xdp2,zdp2) = semicircle(B,t,0.5*L) #patas 1,3,5
+        (xd2,zd2,xdp2,zdp2) = semicircle(A,t,0.5*L) #patas 1,3,5
         x1 = Posbody1[0]
         y1 = Posbody1[1]+xd1
         data1 = np.dot(np.linalg.inv(Rz1),np.array([x1,y1]))
         x2 = Posbody2[0]
         y2 = Posbody2[1]+xd2
         data2 = np.dot(np.linalg.inv(Rz2),np.array([x2,y2]))
+
         targetPose1 = np.array([data1[0],data1[1],Pos1[2,3]+zd1])
         targetPose2 = np.array([data2[0],data2[1],Pos2[2,3]+zd2])
         error1=np.linalg.norm(targetPose1-currentPose1)
@@ -194,45 +192,34 @@ def hexapod_controlinit(leg1,location1,leg2,location2):
 if __name__ == '__main__':
     try:
         n=0 #number of iterations
-        angle=np.array([[0.175, 0.6639, 0.175, 0.175, -0.6639, 0.175, 0.175, 0, 0.175, 0.175, 0, 0.175, 0.175, -0.664, 0.175, 0.175, 0.664, 0.175]])
+        angle=np.array([[0.175, 0.6639, 0.175, 0.175, -0.6639, 0.175, 0.175, 0, 0.175, 0.175, 0, 0.175, 0.175, -0.6639, 0.175, 0.175, 0.6639, 0.175]])
         angle4 = np.array([[angle[0][1],angle[0][2],angle[0][0]],
                 [angle[0][4],angle[0][5],angle[0][3]],
                 [angle[0][7],angle[0][8],angle[0][6]],
                 [angle[0][10],angle[0][11],angle[0][9]],
                 [angle[0][13],angle[0][14],angle[0][12]],
                 [angle[0][16],angle[0][17],angle[0][15]]])
-        #print('inicio',angle4)
-        correction = np.array([[0.9068,0,0],
-                [-0.9068,0,0],
-                [0,0,0],
-                [0,0,0],
-                [0,0,0],
-                [0,0,0]])
+        startangle=angle4    
         print('initial:',angle4)
         hexapod_control(angle4)
         print('forward movement')
-        while(n<10):
-            leg = np.array([4,4,2,5,3,3,6,1])
+        while(n<5):
+            leg = np.array([6,1,4,4,2,5,3,3])#np.array([4,4,2,5,3,3,6,1])
             for i in range(0,len(leg),2):
                 Q1, Q2 = hexapod_controlinit(leg[i],np.array([angle4[leg[i]-1]]),leg[i+1],np.array([angle4[leg[i+1]-1]]))
                 print('LEG:',leg[i],leg[i+1])
-                #print('LEG:',leg[i],leg[i+1],np.rad2deg(angle4[leg[i]-1][0]-Q1[0][0]),np.rad2deg(angle4[leg[i+1]-1][0]-Q1[0][0]))
-                #print(np.rad2deg(Q1[0][0]),np.rad2deg(Q2[0][0]))
+                angle4[leg[i]-1][0]=Q1[0][0]
                 angle4[leg[i]-1][1]=Q1[0][1]
                 angle4[leg[i]-1][2]=Q1[0][2]
                 if leg[i] != leg[i+1]:
+                    angle4[leg[i+1]-1][0]=Q2[0][0]
                     angle4[leg[i+1]-1][1]=Q2[0][1]
                     angle4[leg[i+1]-1][2]=Q2[0][2]
+            print(angle4)
             n=n+1
             print(n)
-            #angle4[0][0]=angle4[0][0]+0.087
-            #angle4[1][0]=angle4[1][0]+0.087
-            #angle4[2][0]=angle4[2][0]+0.087
-            #angle4[3][0]=angle4[3][0]+0.087
-            #angle4[4][0]=angle4[4][0]+0.087
-            #angle4[5][0]=angle4[5][0]+0.087
-            #homeposition(angle4)
-        #print('final',angle4)
+        #homeposition(angle4)
+        print('final',angle4)
 
     except rospy.ROSInterruptException:
         pass
