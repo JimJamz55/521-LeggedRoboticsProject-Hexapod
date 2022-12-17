@@ -66,7 +66,7 @@ def hexapod_control(A):
     time.sleep(0.4)
     leg3_hip_joint_pos_con.publish(A[2][0])
 
-def homeposition():
+def homeposition(leg,dato):
     rospy.init_node('Hexapod_controller', anonymous=True)
     leg1_hip_joint_pos_con = rospy.Publisher('/hexapod/leg1_hip_joint_pos_con/command', Float64, queue_size=10)
     leg2_hip_joint_pos_con = rospy.Publisher('/hexapod/leg2_hip_joint_pos_con/command', Float64, queue_size=10)
@@ -74,16 +74,17 @@ def homeposition():
     leg4_hip_joint_pos_con = rospy.Publisher('/hexapod/leg4_hip_joint_pos_con/command', Float64, queue_size=10)
     leg5_hip_joint_pos_con = rospy.Publisher('/hexapod/leg5_hip_joint_pos_con/command', Float64, queue_size=10)
     leg6_hip_joint_pos_con = rospy.Publisher('/hexapod/leg6_hip_joint_pos_con/command', Float64, queue_size=10)
-    print('retrocediendo')
-    for i in np.arange(0, 0.33, 0.01):
-            leg1_hip_joint_pos_con.publish(-i)
-            leg2_hip_joint_pos_con.publish(i)
-            leg3_hip_joint_pos_con.publish(-i)
-            leg4_hip_joint_pos_con.publish(i)
-            leg5_hip_joint_pos_con.publish(-i)
-            leg6_hip_joint_pos_con.publish(i)
-            time.sleep(0.05)
-    print('position final',i)
+    if leg == 1:
+        leg1_hip_joint_pos_con.publish(dato)
+        leg6_hip_joint_pos_con.publish(-dato)
+    if leg == 2:
+        leg2_hip_joint_pos_con.publish(-dato)
+        leg5_hip_joint_pos_con.publish(dato)
+    if leg == 3:
+        leg3_hip_joint_pos_con.publish(dato)
+    if leg == 4:
+        leg4_hip_joint_pos_con.publish(-dato)
+    time.sleep(0.05)
 
 def hexapod_controlinit(leg1,location1,leg2,location2):
     rospy.init_node('Hexapod_controller', anonymous=True)
@@ -199,14 +200,60 @@ if __name__ == '__main__':
                 [angle[0][10],angle[0][11],angle[0][9]],
                 [angle[0][13],angle[0][14],angle[0][12]],
                 [angle[0][16],angle[0][17],angle[0][15]]])
+        angle5 = np.array([[2.47539e-02,1.09258474,1.22356866],
+                [-2.47539390e-02,1.0925874,1.22356866],
+                [-6.283185,1.06185831,1.17817347],
+                [-6.30793925,1.06185831,1.17817347],
+                [-6.3079,1.0925874,1.22356866],
+                [-6.2584,1.0925874,1.22356866]])
         print('initial:',angle4)
         hexapod_control(angle4)
         print('forward movement')
-        while(n<1):
-            leg = np.array([6,1,4,4,2,5,3,3])#np.array([6,1,4,4,2,5,3,3])
+        start16=0 #leg1 leg 6
+        start25 = 0 #leg 2 leg 5
+        start3 = 0 #leg 3
+        start4 = 0 # leg4
+        paso = 0.110
+        while(n<4):
+            leg = np.array([4,4,2,5,3,3,6,1])#np.array([6,1,4,4,2,5,3,3])
             for i in range(0,len(leg),2):
                 Q1, Q2 = hexapod_controlinit(leg[i],np.array([angle4[leg[i]-1]]),leg[i+1],np.array([angle4[leg[i+1]-1]]))
                 print('LEG:',leg[i],leg[i+1])
+                if n>0:
+                    if i == 0:
+                        homeposition(1,0.66*paso)
+                        homeposition(2,0)
+                        homeposition(3,0.33*paso)
+                        angle4[0][0]=0.66*paso
+                        angle4[5][0]=-0.66*paso
+                        angle4[1][0]=0
+                        angle4[2][0]=0.33*paso
+
+                    if i == 1:
+                        homeposition(1,0.33*paso)
+                        homeposition(3,0)
+                        homeposition(4,0.66*paso)
+                        angle4[0][0]=0.33*paso
+                        angle4[5][0]=-0.33*paso
+                        angle4[2][0]=0
+                        angle4[3][0]=-0.66*paso
+                    if i == 2:
+                        homeposition(1,0)
+                        homeposition(2,0.66*paso)
+                        homeposition(4,0.33*paso)
+                        angle4[0][0]=0
+                        angle4[5][0]=0
+                        angle4[1][0]=-0.66*paso
+                        angle4[3][0]=-0.33*paso
+                    if i == 3:
+                        homeposition(4,0)
+                        homeposition(2,0.33*paso)
+                        homeposition(3,0.66*paso)
+                        angle4[3][0]=0
+                        angle4[1][0]=-0.33*paso
+                        angle4[4][0]=0.33*paso
+                        angle4[2][0]=0.66*paso
+
                 angle4[leg[i]-1][0]=Q1[0][0]
                 angle4[leg[i]-1][1]=Q1[0][1]
                 angle4[leg[i]-1][2]=Q1[0][2]
